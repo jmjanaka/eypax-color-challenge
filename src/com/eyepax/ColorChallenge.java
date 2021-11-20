@@ -1,34 +1,47 @@
 package com.eyepax;
 
+import java.util.Random;
+
 class ColorChallenge
 {
-    static final int rows = 6;
-    static final int columns = 5;
-    static final int color_grid[][] = new int [rows][columns];
-    static final int result[][] = new int [rows][columns];
+    static int rows = 6;
+    static int columns = 5;
+    static int sample[][];
+    public static final int[] COLORS = {1, 2, 3, 4};
+    static int color_grid[][] = new int [rows][columns];
+
+    static int result[][] = new int [rows][columns];
+
     static int COUNT;
 
     // main method
     public static void main(String args[])
     {
-        int sampleGrid[][] = {
-                {1,	2,	1,	2,	3},
-                {3,	2,	1,	1,	1},
-                {2,	2,	1,	2,	3},
-                {1,	2,	3,	2,	2},
-                {2,	1,	2,	2,	3},
-                {3,	2,	2,	2,	1}};
-
-        /**
-         *  1 --> YELLOW
-         *  2 --> RED
-         *  3 --> BLUE
-         */
+        ColorChallenge colorChallenge2 = new ColorChallenge();
+        colorChallenge2.initSampleGrid(7, 8);
 
         System.out.println("All color grid : ");
-        print2D(sampleGrid);
+        print2D(sample);
 
-        findLargestConnectedData(sampleGrid);
+        findLargestConnectedData(sample);
+    }
+
+    public void initSampleGrid(int columns, int rows) {
+        this.columns = columns;
+        this.rows = rows;
+        sample = new int[rows][columns];
+        color_grid = new int [rows][columns];
+        result = new int [rows][columns];
+
+        Random random = new Random();
+        for (int row = 0; row < sample.length; row++)
+        {
+            for (int col = 0; col < sample[row].length; col++)
+            {
+                sample[row][col] = COLORS[random.nextInt(4)]; //Whatever value you want to set them to
+            }
+        }
+
     }
 
     // Find the largest connected grid data
